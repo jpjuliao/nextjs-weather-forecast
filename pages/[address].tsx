@@ -63,7 +63,7 @@ export default function Home({ periods, geocoder }: InferGetServerSidePropsType<
             ))}
           </ul>
           <div className="px-4 py-3 text-center sm:px-6 mt-10">
-            <button onClick={_ => window.location.href = "/"} className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">New Search</button>
+            <button onClick={_ => window.location.href = "/"} className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">New Search</button>
           </div>
         </main>
         <Footer />
