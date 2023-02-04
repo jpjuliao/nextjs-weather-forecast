@@ -1,8 +1,14 @@
+# Weather Forecast App
+
+Created with NextJS, TailwindCSS and Typescript. It gathers data from the [National Weather Service API](https://www.weather.gov/) and the [US Census geocoder](https://geocoding.geo.census.gov/geocoder/).
+
+[Check the demo hosted in Vercel](jpjuliao-nextjs-weather-forecast.vercel.app/).
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+First add the HOST env variable and then run the development server:
 
 ```bash
 npm run dev
