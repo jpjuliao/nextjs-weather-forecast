@@ -10,15 +10,16 @@ export default function WeatherInfo({ item }: any) {
               <Image src={item.icon} alt={"Icon for " + item.shortForecast} width={113} height={113}/>
             </div>
             <div id="day-title" className='w-full md:static absolute top-0 left-0 right-0'>
-              <h2 className="font-bold text-xs h-14 mb-2 flex md:justify-center md:text-center place-items-center bg-gray-700 text-white leading-4 px-4 md:px-2">{item.name}</h2>
+              <h2 className="font-bold md:text-xs text-base h-14 mb-2 flex md:justify-center md:text-center place-items-center bg-gray-700 text-white leading-4 px-4 md:px-2">{item.name}</h2>
             </div>
             <div id="temp" className='px-2 flex-1 flex-grow'>
               <h4 className="lg:text-4xl md:text-2xl text-xl text-center md:text-gray-700 text-white mt-2 md:static absolute top-1 right-4">{item.temperature}&deg;{item.temperatureUnit}</h4>
-              <p className="text-xs text-gray-500 h-auto md:h-32 overflow-hidden pt-2 md:pt-0">{item.detailedForecast}</p>
-              <div className="text-xs text-gray-500">
+              <p className="text-2xl text-gray-500 md:h-20 md:leading-6 overflow-hidden pt-2 md:pt-0 md:text-center md:flex items-center justify-center">{item.shortForecast}</p>
+              <div className="text-xs text-gray-500 md:text-center">
+                <h3 className='text-base mb-0 border-t pt-1 md:pt-2'>Wind</h3>
                 <ul className='md:block flex justify-between'>
-                  <li><strong> Wind direction: </strong><br /> {item.windDirection}</li>
-                  <li><strong>Wind Speed:</strong><br /> {item.windSpeed}</li>
+                  <li><strong>Direction: </strong><br /> {item.windDirection}</li>
+                  <li><strong>Speed:</strong><br /> {item.windSpeed}</li>
                 </ul>
               </div>
             </div>
