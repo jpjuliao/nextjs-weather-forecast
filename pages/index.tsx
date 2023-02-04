@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import AddressForm from '@/components/AddressForm'
 import Footer from '@/components/Footer'
+import AnimatedBackground from '@/components/AnimatedBackground'
 
 export default function Home() {
   return (
@@ -11,9 +12,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className='flex flex-col h-screen justify-between'>
+      <AnimatedBackground />
+      <div className='flex flex-col h-screen justify-between relative'>
         <main className="container m-auto p-4">
-          <h1 className='text-center p-8'>Weather Forecast</h1>
           <AddressForm />
         </main>
         <Footer />

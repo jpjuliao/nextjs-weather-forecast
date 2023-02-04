@@ -1,26 +1,142 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 h1 {
-  @apply text-6xl font-bold mb-2
+  @apply text-6xl font-bold mb-2;
 }
 
 h2 {
   @extend h1;
-  @apply text-3xl
+  @apply text-3xl;
 }
 
 h3 {
   @extend h1;
-  @apply text-2xl
+  @apply text-2xl;
 }
 
 h4 {
   @extend h1;
-  @apply text-xl
+  @apply text-xl;
 }
 
 p {
-  @apply mb-2
+  @apply mb-2;
+}
+
+.background {
+  width: 800px;
+  margin: 30px auto;
+}
+
+.animated-background {
+  .sky {
+    background: #81d5fa
+  }
+  .water {
+    background-color: #27c7da;
+  }
+  .cls-21,
+  .cls-20,
+  .cls-19,
+  .cls-22,
+  .cls-14,
+  .cls-23 {
+    animation-name: ship-move, ship-move1;
+    animation-duration: 6s, 15s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+
+  @keyframes ship-move {
+    0% {
+      transform: translate(0px);
+    }
+    50% {
+      transform: translate(6px);
+    }
+  }
+
+  @keyframes ship-move1 {
+    0% {
+      transform: rotate(2deg);
+    }
+    50% {
+      transform: rotate(-0.5deg);
+    }
+    100% {
+      transform: rotate(2deg);
+    }
+  }
+
+  .cls-4:first-child,
+  .cls-5 {
+    animation-name: back-cloud-move;
+    animation-duration: 100s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transform: translate(240px);
+  }
+
+  @keyframes back-cloud-move {
+    0% {
+      transform: translate(240px);
+    }
+    100% {
+      transform: translate(-240px);
+    }
+  }
+
+  .cls-4:not(:first-child),
+  .cls-13 {
+    animation-name: cloud-move;
+    animation-duration: 70s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transform: translate(-240px);
+  }
+
+  @keyframes cloud-move {
+    0% {
+      transform: translate(-240px);
+    }
+    100% {
+      transform: translate(240px);
+    }
+  }
+
+  .cls-24 {
+    animation-name: wave1-move;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transform: translateY(1px);
+  }
+
+  @keyframes wave1-move {
+    0% {
+      transform: translateY(1px);
+    }
+    50% {
+      transform: translateY(-1px);
+    }
+  }
+
+  .cls-25 {
+    animation-name: wave2-move;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transform: translateY(0px);
+  }
+
+  @keyframes wave2-move {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(1px);
+    }
+  }
 }

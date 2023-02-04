@@ -87,7 +87,8 @@ export default function AddressForm() {
           <Image src={LoaderURL} alt="Loader icon" width={50} />
         </div>
         <div id="search-address-error" className="text-center m-4 p-4 rounded text-white bg-red-600 hidden"></div>
-        <div className="bg-white px-4 py-5 sm:p-6">
+        <div className="bg-white/[.8] px-4 py-5 sm:p-6">
+          <h1 className='text-center p-8'>Weather Forecast</h1>
           <div className="grid grid-cols-6 gap-6">
 
             <div className="col-span-6">
