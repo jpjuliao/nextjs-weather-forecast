@@ -2,10 +2,33 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.scss'
+import { InferGetServerSidePropsType } from 'next'
+import { GetServerSideProps } from 'next'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+type Data = {}
+
+export const getServerSideProps: GetServerSideProps<{ data: Data }> = async () => {
+
+  const data = await fetch('https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=4600+Silver+Hill+Rd%2C+Washington%2C+DC+20233&benchmark=2020&format=json')
+    .then(r => {
+      if (!r.ok) {
+        throw new Error('Geocoder request error')
+      }
+      return r.json()
+    })
+    .then(data => data)
+    .catch(e => JSON.stringify(e))
+
+  return {
+    props: {
+      data,
+    },
+  }
+}
+
+export default function Home({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
       <Head>
@@ -15,7 +38,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={inter.className}>
-
+        {JSON.stringify(data)}
       </main>
     </>
   )
