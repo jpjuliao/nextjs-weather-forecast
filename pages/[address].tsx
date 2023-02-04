@@ -47,14 +47,14 @@ export default function Home({ periods }: InferGetServerSidePropsType<typeof get
       <div className='flex flex-col h-screen justify-between'>
         <h1 className='text-center p-8'>Weather Forecast</h1>
         <main className="container m-auto p-4">
-          <ul className="grid grid-cols-7 gap-4">
+          <ul className="grid md:grid-cols-7 grid-cols-1 md:gap-2 gap-4 max-w-[850px] m-auto">
             {periods.map((item: any, key: number) => (
               <li key={key} className="">
                 <WeatherInfo item={item} />
               </li>
             ))}
           </ul>
-          <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
+          <div className="px-4 py-3 text-center sm:px-6 mt-10">
             <button onClick={_ => window.location.href = "/"} className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">New Search</button>
           </div>
         </main>
