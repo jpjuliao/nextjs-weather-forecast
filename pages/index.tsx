@@ -12,14 +12,14 @@ type Data = {}
 export const getServerSideProps: GetServerSideProps<{ data: Data }> = async () => {
 
   const data = await fetch('https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=4600+Silver+Hill+Rd%2C+Washington%2C+DC+20233&benchmark=2020&format=json')
-    .then(r => {
-      if (!r.ok) {
+    .then(response => {
+      if (!response.ok) {
         throw new Error('Geocoder request error')
       }
-      return r.json()
+      return response.json()
     })
     .then(data => data)
-    .catch(e => JSON.stringify(e))
+    .catch(error => JSON.stringify(error))
 
   return {
     props: {
@@ -38,7 +38,9 @@ export default function Home({ data }: InferGetServerSidePropsType<typeof getSer
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={inter.className}>
-        {JSON.stringify(data)}
+        <pre>
+          {JSON.stringify(data)}
+        </pre>
       </main>
     </>
   )
