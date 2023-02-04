@@ -8,7 +8,11 @@ type Data = {
   map: any
 }
 
-export const getServerSideProps: GetServerSideProps<{ periods: Data }> = async (context) => {
+type GeocoderData = {
+  input: { address: { address: string } }
+}
+
+export const getServerSideProps: GetServerSideProps<{ periods: Data, geocoder: GeocoderData }> = async (context) => {
   const params = context.params
   const address = params ? params.address : ''
   const geocoder_response = await fetch(process.env.HOST + 'api/geocoder/' + address)
@@ -30,12 +34,13 @@ export const getServerSideProps: GetServerSideProps<{ periods: Data }> = async (
   const periods = data.properties.periods.slice(0, 7)
   return {
     props: {
-      periods
+      periods,
+      geocoder
     },
   }
 }
 
-export default function Home({ periods }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home({ periods, geocoder }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
       <Head>
@@ -46,6 +51,8 @@ export default function Home({ periods }: InferGetServerSidePropsType<typeof get
       </Head>
       <div className='flex flex-col h-screen justify-between'>
         <h1 className='text-center p-8'>Weather Forecast</h1>
+        <div className='text-center text-xl'>Address found: <strong>{geocoder.input.address.address}.</strong>
+        </div>
         <main className="container m-auto p-4">
           <ul className="grid md:grid-cols-7 grid-cols-1 md:gap-2 gap-4 max-w-[850px] m-auto">
             {periods.map((item: any, key: number) => (
