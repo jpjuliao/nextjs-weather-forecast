@@ -1,35 +1,8 @@
 import Head from 'next/head'
-import { Anybody, Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.scss'
-import { InferGetServerSidePropsType } from 'next'
-import { GetServerSideProps } from 'next'
-import WeatherInfo from '../components/WeatherInfo'
+import AddressForm from '@/components/AddressForm'
+import Footer from '@/components/Footer'
 
-const inter = Inter({ subsets: ['latin'] })
-
-type Data = {
-  map: any
-}
-
-export const getServerSideProps: GetServerSideProps<{ periods: Data }> = async () => {
-  const address = '4600+Silver+Hill+Rd%2C+Washington%2C+DC+20233'
-  const geocoder_response = await fetch(process.env.HOST + 'api/geocoder/' + address)
-  const geocoder = await geocoder_response.json()
-  const coordinates = [
-    geocoder.addressMatches[0].coordinates.y,
-    geocoder.addressMatches[0].coordinates.x
-  ].join(',')
-  const weather_response = await fetch(process.env.HOST + 'api/weather/' + coordinates)
-  const data = await weather_response.json()
-  const periods = data.properties.periods.slice(0,7)
-  return {
-    props: {
-      periods
-    },
-  }
-}
-
-export default function Home({ periods }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home() {
   return (
     <>
       <Head>
@@ -38,15 +11,13 @@ export default function Home({ periods }: InferGetServerSidePropsType<typeof get
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="container m-auto p-4">
-        <ul className="grid grid-cols-7 gap-4">
-          {periods.map((item: any, key: number) => (
-            <li key={key} className="">
-              <WeatherInfo item={item} />
-            </li>
-          ))}
-        </ul>
-      </main>
+      <div className='flex flex-col h-screen justify-between'>
+        <main className="container m-auto p-4">
+          <h1 className='text-center p-8'>Weather Forecast</h1>
+          <AddressForm />
+        </main>
+        <Footer />
+      </div>
     </>
   )
 }
