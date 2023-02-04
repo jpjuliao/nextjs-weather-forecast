@@ -15,7 +15,8 @@ type GeocoderData = {
 export const getServerSideProps: GetServerSideProps<{ periods: Data, geocoder: GeocoderData }> = async (context) => {
   const params = context.params
   const address = params ? params.address : ''
-  const geocoder_response = await fetch(process.env.HOST + 'api/geocoder/' + address)
+  const addressUri = typeof address === 'string' ? encodeURI(address) : ''
+  const geocoder_response = await fetch(process.env.HOST + 'api/geocoder/' + addressUri)
   const geocoder = await geocoder_response.json()
   if (typeof geocoder.addressMatches[0] === 'undefined') {
     return {
