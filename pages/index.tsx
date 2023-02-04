@@ -1,34 +1,35 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
+import { Anybody, Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.scss'
 import { InferGetServerSidePropsType } from 'next'
 import { GetServerSideProps } from 'next'
+import WeatherInfo from '../components/WeatherInfo'
 
 const inter = Inter({ subsets: ['latin'] })
 
-type Data = {}
+type Data = {
+  map: any
+}
 
-export const getServerSideProps: GetServerSideProps<{ data: Data }> = async () => {
-
-  const data = await fetch('https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=4600+Silver+Hill+Rd%2C+Washington%2C+DC+20233&benchmark=2020&format=json')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Geocoder request error')
-      }
-      return response.json()
-    })
-    .then(data => data)
-    .catch(error => JSON.stringify(error))
-
+export const getServerSideProps: GetServerSideProps<{ periods: Data }> = async () => {
+  const address = '4600+Silver+Hill+Rd%2C+Washington%2C+DC+20233'
+  const geocoder_response = await fetch(process.env.HOST + 'api/geocoder/' + address)
+  const geocoder = await geocoder_response.json()
+  const coordinates = [
+    geocoder.addressMatches[0].coordinates.y,
+    geocoder.addressMatches[0].coordinates.x
+  ].join(',')
+  const weather_response = await fetch(process.env.HOST + 'api/weather/' + coordinates)
+  const data = await weather_response.json()
+  const periods = data.properties.periods.slice(0,7)
   return {
     props: {
-      data,
+      periods
     },
   }
 }
 
-export default function Home({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home({ periods }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
       <Head>
@@ -37,10 +38,14 @@ export default function Home({ data }: InferGetServerSidePropsType<typeof getSer
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={inter.className}>
-        <pre>
-          {JSON.stringify(data)}
-        </pre>
+      <main className="container m-auto p-4">
+        <ul className="grid grid-cols-7 gap-4">
+          {periods.map((item: any, key: number) => (
+            <li key={key} className="">
+              <WeatherInfo item={item} />
+            </li>
+          ))}
+        </ul>
       </main>
     </>
   )
