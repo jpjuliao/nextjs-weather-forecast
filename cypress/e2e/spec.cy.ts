@@ -41,3 +41,5 @@ describe('Tests suite', () => {
       .and('be.visible')    
   })
 })
+
+export {}
