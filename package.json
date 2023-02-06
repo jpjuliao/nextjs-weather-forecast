@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "cypress": "cypress open"
+    "cypress": "export CYPRESS_HOST=process.env.HOST && cypress open"
   },
   "dependencies": {
     "@next/font": "13.1.6",

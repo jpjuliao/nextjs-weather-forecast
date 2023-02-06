@@ -55,7 +55,7 @@ export default function Home({ periods, geocoder }: InferGetServerSidePropsType<
         <div className='text-center text-xl'>Address found: <strong>{geocoder.input.address.address}.</strong>
         </div>
         <main className="container m-auto p-4">
-          <ul className="grid md:grid-cols-7 grid-cols-1 md:gap-2 gap-4 max-w-[850px] m-auto">
+          <ul id="weather-data" className="grid md:grid-cols-7 grid-cols-1 md:gap-2 gap-4 max-w-[850px] m-auto">
             {periods.map((item: any, key: number) => (
               <li key={key} className="">
                 <WeatherInfo item={item} />
