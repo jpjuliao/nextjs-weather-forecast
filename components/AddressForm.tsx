@@ -14,22 +14,22 @@ export default function AddressForm() {
     const postalCode = document.querySelector('#postal-code') as HTMLInputElement
 
     if (!street.value || street.value.length < 3) {
-      showError('Please a valid Street name.')
+      showError('Please enter a valid Street name.')
       return false
     }
 
     if (!city.value || city.value.length < 3) {
-      showError('Please a valid City name.')
+      showError('Please enter a valid City name.')
       return false
     }
 
     if (!region.value || region.value.length < 1) {
-      showError('Please a valid Region name.')
+      showError('Please enter a valid Region name.')
       return false
     }
 
     if (!postalCode.value || postalCode.value.length < 5) {
-      showError('Please a valid Postal Code name.')
+      showError('Please enter a valid Postal Code name.')
       return false
     }
 
