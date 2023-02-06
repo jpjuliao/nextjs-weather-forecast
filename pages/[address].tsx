@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps<{ periods: Data, geocoder: G
   ].join(',')
   const weather_response = await fetch(process.env.HOST + 'api/weather/' + coordinates)
   const data = await weather_response.json()
-  const periods = data.properties.periods.slice(0, 7)
+  const periods = data.properties.periods
   return {
     props: {
       periods,
